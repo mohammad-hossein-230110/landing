@@ -6,6 +6,8 @@ import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import IntlTelInput from 'react-intl-tel-input';
+import 'react-intl-tel-input/dist/main.css';
 
 i18n.use(initReactI18next).init({
     resources: {
@@ -30,6 +32,12 @@ const Form = ({language , setLanguage}) => {
     const [name , setName] = useState()
     const [number , setNumber] = useState()
     const [description , setDescription] = useState("")
+    
+
+    const handlePhoneNumberChange = (value, country) => {
+    setNumber(value);
+    // setSelectedCountry(country);
+  };
 
     async function submit() {
         let info = {
@@ -71,6 +79,11 @@ const Form = ({language , setLanguage}) => {
 
   const { t } = useTranslation();
   const { i18n } = useTranslation();
+
+    const filteredCountries = window.intlTelInputGlobals.getCountryData().filter((country) => {
+    return country.iso2 !== 'IL'; // IL is the ISO 2 code for Israel
+  });
+
   useEffect(() => {
       const getparticipants = () => {
        
@@ -99,14 +112,21 @@ const Form = ({language , setLanguage}) => {
               placeholder={t("name")}
               className=" pr-4 font-sahel focus:outline-none   placeholder:font-sahel placeholder:pr-2 placeholder:pl-2 placeholder:sm:text-[14px] sm:text-[14px] placeholder:text-[10px] placeholder:pb-2 rounded-[8px] sm:w-[300px] sm:h-[50px] h-[40px] w-[180px]"
             ></input>
-            <input
+            {/* <input
               dir={`${language==0 ? "ltr" : "rtl" }`}
               type="text"
               value={number}
             onChange={(e) => setNumber(e.target.value)}
               placeholder={t("number")}
               className=" pr-4 font-sahel focus:outline-none placeholder:font-sahel placeholder:pr-2 placeholder:pl-2 placeholder:sm:text-[14px] sm:text-[14px] placeholder:text-[10px] placeholder:pb-2 rounded-[8px] sm:w-[300px] sm:h-[50px] h-[40px] w-[180px]"
-            ></input>
+            ></input> */}
+
+             <IntlTelInput
+        containerClassName="mt-4"
+        value={phoneNumber}
+        onPhoneNumberChange={handlePhoneNumberChange}
+        countries={filteredCountries}
+      />
 
             <button
               onClick={submit}
@@ -114,8 +134,8 @@ const Form = ({language , setLanguage}) => {
             >
               {t("button")}
             </button>
-            { language == 0 ? <ToastContainer/> :
-          <ToastContainer rtl/>}
+            {/* { language == 0 ? <ToastContainer/> :
+          <ToastContainer rtl/>} */}
     </div>
   )
 }
