@@ -35,8 +35,15 @@ const Form = ({language , setLanguage}) => {
     
 
     const handlePhoneNumberChange = (value, country) => {
-    setNumber(value);
-    // setSelectedCountry(country);
+
+      console.log(value)
+    setNumber(country);
+    // console.log(typeof value)
+    console.log( country)
+
+    // setNumber()
+    
+     
   };
 
     async function submit() {
@@ -80,9 +87,9 @@ const Form = ({language , setLanguage}) => {
   const { t } = useTranslation();
   const { i18n } = useTranslation();
 
-    const filteredCountries = window.intlTelInputGlobals.getCountryData().filter((country) => {
-    return country.iso2 !== 'IL'; // IL is the ISO 2 code for Israel
-  });
+  //   const filteredCountries = window.intlTelInputGlobals.getCountryData().filter((country) => {
+  //   return country.iso2 !== 'IL'; // IL is the ISO 2 code for Israel
+  // });
 
   useEffect(() => {
       const getparticipants = () => {
@@ -122,11 +129,13 @@ const Form = ({language , setLanguage}) => {
             ></input> */}
 
              <IntlTelInput
-        containerClassName="pr-4 font-sahel focus:outline-none placeholder:font-sahel placeholder:pr-2 placeholder:pl-2 placeholder:sm:text-[14px] sm:text-[14px] placeholder:text-[10px] placeholder:pb-2 rounded-[8px] sm:w-[300px] sm:h-[50px] h-[40px] w-[180px]"
+       
+        // containerClassName="pr-4 font-sahel focus:outline-none placeholder:font-sahel placeholder:pr-2 placeholder:pl-2 placeholder:sm:text-[14px] sm:text-[14px] placeholder:text-[10px] placeholder:pb-2 rounded-[8px] sm:w-[300px] sm:h-[50px] h-[40px] w-[180px]"
         value={number}
         dir={`${language==0 ? "ltr" : "rtl" }`}
         onPhoneNumberChange={handlePhoneNumberChange}
-        countries={filteredCountries}
+        // onChange = {(e)=>setNumber(e.value.target)}
+        // countries={filteredCountries}
       />
 
             <button
