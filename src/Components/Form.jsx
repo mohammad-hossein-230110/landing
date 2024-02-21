@@ -122,8 +122,9 @@ const Form = ({language , setLanguage}) => {
             ></input> */}
 
              <IntlTelInput
-        containerClassName="mt-4"
-        value={phoneNumber}
+        containerClassName="pr-4 font-sahel focus:outline-none placeholder:font-sahel placeholder:pr-2 placeholder:pl-2 placeholder:sm:text-[14px] sm:text-[14px] placeholder:text-[10px] placeholder:pb-2 rounded-[8px] sm:w-[300px] sm:h-[50px] h-[40px] w-[180px]"
+        value={number}
+        dir={`${language==0 ? "ltr" : "rtl" }`}
         onPhoneNumberChange={handlePhoneNumberChange}
         countries={filteredCountries}
       />
