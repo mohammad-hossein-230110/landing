@@ -31,15 +31,15 @@ const Form = ({language , setLanguage}) => {
 
     const [name , setName] = useState()
     const [number , setNumber] = useState()
-    const [description , setDescription] = useState("")
-    
+    const [description , setDescription] = useState("")  
 
-    const handlePhoneNumberChange = (value, country) => {
-
-      console.log(value)
-    setNumber(country);
+    const handlePhoneNumberChange = (value, Number,selectedCountryData) => {
+      setNumber("")
+       let val = selectedCountryData.dialCode + Number
+    setNumber(val);
     // console.log(typeof value)
-    console.log( country)
+    console.log( number)
+    // console.log(selectedCountryData.dialCode)
 
     // setNumber()
     
@@ -86,11 +86,6 @@ const Form = ({language , setLanguage}) => {
 
   const { t } = useTranslation();
   const { i18n } = useTranslation();
-
-  //   const filteredCountries = window.intlTelInputGlobals.getCountryData().filter((country) => {
-  //   return country.iso2 !== 'IL'; // IL is the ISO 2 code for Israel
-  // });
-
   useEffect(() => {
       const getparticipants = () => {
        
@@ -134,8 +129,10 @@ const Form = ({language , setLanguage}) => {
         value={number}
         dir={`${language==0 ? "ltr" : "rtl" }`}
         onPhoneNumberChange={handlePhoneNumberChange}
-        // onChange = {(e)=>setNumber(e.value.target)}
-        // countries={filteredCountries}
+        excludeCountries={['il']}
+        // separateDialCode={true}
+        preferredCountries={['ir']}
+        // selectedCountryData = {selectedcountrydata}
       />
 
             <button
