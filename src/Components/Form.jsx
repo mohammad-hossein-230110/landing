@@ -32,13 +32,16 @@ const Form = ({language , setLanguage}) => {
     const [name , setName] = useState()
     const [number , setNumber] = useState()
     const [description , setDescription] = useState("")  
+    const [selectedCountryData, setselectedCountryData] = useState()
+    const [justnumer , setJustNumber]  = useState()
 
     const handlePhoneNumberChange = (value, Number,selectedCountryData) => {
-      setNumber("")
-       let val = selectedCountryData.dialCode + Number
-    setNumber(val);
+      // setNumber("")
+       setselectedCountryData(selectedCountryData.dialCode)
+       setJustNumber(Number)
+    setNumber(Number);
     // console.log(typeof value)
-    console.log( number)
+    // console.log( number) 
     // console.log(selectedCountryData.dialCode)
 
     // setNumber()
@@ -47,11 +50,21 @@ const Form = ({language , setLanguage}) => {
   };
 
     async function submit() {
-        let info = {
-          complex_name: name,
-          phone_number: number,
-          description: description,
-        };
+
+      let val = selectedCountryData + number
+      setNumber(selectedCountryData+number)
+      
+      console.log(val)
+      console.log(selectedCountryData)
+      setTimeout(() => {
+        
+        console.log(number)
+      }, 4000);
+      let info = {
+        complex_name: name,
+        phone_number: number,
+        description: description,
+      };
     
         await fetch("http://192.168.9.6:8000/forms/the-issue-of-honorables/", {
           method: "POST",
@@ -89,7 +102,7 @@ const Form = ({language , setLanguage}) => {
   useEffect(() => {
       const getparticipants = () => {
        
-          console.log(language)
+          // console.log(language)
           if(language==0){
             changeLanguage("en")
           }
@@ -126,9 +139,10 @@ const Form = ({language , setLanguage}) => {
              <IntlTelInput
        
         // containerClassName="pr-4 font-sahel focus:outline-none placeholder:font-sahel placeholder:pr-2 placeholder:pl-2 placeholder:sm:text-[14px] sm:text-[14px] placeholder:text-[10px] placeholder:pb-2 rounded-[8px] sm:w-[300px] sm:h-[50px] h-[40px] w-[180px]"
-        value={number}
+        value={justnumer}
         dir={`${language==0 ? "ltr" : "rtl" }`}
         onPhoneNumberChange={handlePhoneNumberChange}
+        inputClassName=' pr-4 font-sahel focus:outline-none   placeholder:font-sahel placeholder:pr-2 placeholder:pl-2 placeholder:sm:text-[14px] sm:text-[14px] placeholder:text-[10px] text-[12px] placeholder:pb-2 rounded-[8px] sm:w-[300px] sm:h-[50px] h-[40px] w-[180px]'
         excludeCountries={['il']}
         // separateDialCode={true}
         preferredCountries={['ir']}
