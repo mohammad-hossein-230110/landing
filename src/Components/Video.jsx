@@ -36,7 +36,7 @@ const Video = () => {
   // }, [videoRef.paused]);
 
   return (
-    <div className=" mt-8 scale-90 sm:w-[300px] m-[-5px] mb-[-40px] relative sm:h-[192px] w-[250px] h-[150px] rounded-[16px] bg-[#C6835A]">
+    <div className=" mt-4 scale-90 sm:w-[300px] m-[-5px] mb-[-40px] relative sm:h-[192px] w-[250px] h-[150px]  rounded-[16px] bg-[#C6835A]">
     
          <video
             controls

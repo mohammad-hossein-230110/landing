@@ -27,6 +27,19 @@ i18n.use(initReactI18next).init({
     i18n.changeLanguage(lng);
   };
 
+  const PersianToLatin = {
+    '۰': '0',
+    '۱': '1',
+    '۲': '2',
+    '۳': '3',
+    '۴': '4',
+    '۵': '5',
+    '۶': '6',
+    '۷': '7',
+    '۸': '8',
+    '۹': '9',
+  };
+
 const Form = ({language , setLanguage}) => {
 
     const [name , setName] = useState()
@@ -38,33 +51,34 @@ const Form = ({language , setLanguage}) => {
     const handlePhoneNumberChange = (value, Number,selectedCountryData) => {
       // setNumber("")
        setselectedCountryData(selectedCountryData.dialCode)
-       setJustNumber(Number)
-    setNumber(Number);
-    // console.log(typeof value)
-    // console.log( number) 
-    // console.log(selectedCountryData.dialCode)
-
-    // setNumber()
+       
+       let latinValue = '';
+       
+       for (let i = 0; i < Number.length; i++) {
+         const char = Number[i];
+         latinValue += PersianToLatin[char] || char; // If not Persian digit, keep the original character
+        }
+        
+    setJustNumber(latinValue)
+    setNumber(selectedCountryData.dialCode+latinValue);
     
      
   };
 
     async function submit() {
 
-      let val = selectedCountryData + number
-      setNumber(selectedCountryData+number)
+      // let val = selectedCountryData + number
+      // setNumber(selectedCountryData+number)
       
-      console.log(val)
-      console.log(selectedCountryData)
-      setTimeout(() => {
-        
-        console.log(number)
-      }, 4000);
+      // console.log(val)
+      // console.log(selectedCountryData)
+      
       let info = {
         complex_name: name,
         phone_number: number,
         description: description,
       };
+      console.log(number)
     
         await fetch("http://192.168.9.6:8000/forms/the-issue-of-honorables/", {
           method: "POST",
@@ -117,7 +131,7 @@ const Form = ({language , setLanguage}) => {
       getparticipants();
     }, [language]);
   return (
-    <div className=' scale-95 gap-[20px] sm:mt-10   flex flex-col justify-center items-center '>
+    <div className='scale-95 gap-[20px] sm:mt-10 ml-10   flex flex-col justify-center items-center '>
 
  <input
               dir={`${language==0 ? "ltr" : "rtl" }`}
@@ -125,24 +139,15 @@ const Form = ({language , setLanguage}) => {
             onChange={(e) => setName(e.target.value)}
               type="text"
               placeholder={t("name")}
-              className=" pr-4 font-sahel focus:outline-none   placeholder:font-sahel placeholder:pr-2 placeholder:pl-2 placeholder:sm:text-[14px] sm:text-[14px] placeholder:text-[10px] placeholder:pb-2 rounded-[8px] sm:w-[300px] sm:h-[50px] h-[40px] w-[180px]"
+              className=" pr-4 font-sahel focus:outline-none   placeholder:font-sahel placeholder:pr-2 placeholder:pl-2 placeholder:sm:text-[14px] sm:text-[16px] placeholder:text-[10px] placeholder:pb-2 text-[12px] rounded-[8px] sm:w-[300px] sm:h-[50px] h-[40px] w-[180px]"
             ></input>
-            {/* <input
-              dir={`${language==0 ? "ltr" : "rtl" }`}
-              type="text"
-              value={number}
-            onChange={(e) => setNumber(e.target.value)}
-              placeholder={t("number")}
-              className=" pr-4 font-sahel focus:outline-none placeholder:font-sahel placeholder:pr-2 placeholder:pl-2 placeholder:sm:text-[14px] sm:text-[14px] placeholder:text-[10px] placeholder:pb-2 rounded-[8px] sm:w-[300px] sm:h-[50px] h-[40px] w-[180px]"
-            ></input> */}
-
              <IntlTelInput
        
         // containerClassName="pr-4 font-sahel focus:outline-none placeholder:font-sahel placeholder:pr-2 placeholder:pl-2 placeholder:sm:text-[14px] sm:text-[14px] placeholder:text-[10px] placeholder:pb-2 rounded-[8px] sm:w-[300px] sm:h-[50px] h-[40px] w-[180px]"
         value={justnumer}
         dir={`${language==0 ? "ltr" : "rtl" }`}
         onPhoneNumberChange={handlePhoneNumberChange}
-        inputClassName=' pr-4 font-sahel focus:outline-none   placeholder:font-sahel placeholder:pr-2 placeholder:pl-2 placeholder:sm:text-[14px] sm:text-[14px] placeholder:text-[10px] text-[12px] placeholder:pb-2 rounded-[8px] sm:w-[300px] sm:h-[50px] h-[40px] w-[180px]'
+        inputClassName=' pr-4 font-sahel focus:outline-none   placeholder:font-sahel placeholder:pr-2 placeholder:pl-2 placeholder:sm:text-[14px] sm:text-[16px] placeholder:text-[10px] text-[12px] placeholder:pb-2 rounded-[8px] sm:w-[300px] sm:h-[50px] h-[40px] w-[180px]'
         excludeCountries={['il']}
         // separateDialCode={true}
         preferredCountries={['ir']}

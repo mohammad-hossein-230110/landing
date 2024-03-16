@@ -17,13 +17,17 @@ function App() {
 
     <div className= " bg-[#EFA77A] flex sm:h-full  flex-col-reverse sm:flex-row-reverse">
       {/* image */}
-      <img src={data[0].src} alt="" className=" h-[200px] sm:h-[607px]"></img>
+      <img src={data[0].src} alt="" className=" w-[570px] sm:h-full"></img>
+      <img src={ language==2 ? data[7].src : language==1 ? data[8].src : data[9].src} className=' absolute top-0 right-[14%] w-[50px] h-[50px] sm:w-[150px] sm:h-[150px]'></img>
       {/* end image */}
       {/* right secton  */}
       <div className=' w-full   bg-[#EFA77A] '>
         {/*  start top section  */}
-          <div className={` w-full flex sm:items-center sm:flex-row flex-col-reverse  sm:gap-[${ language!=2 ? 15 : 65}px] gap-[20px]    sm:justify-end `}>
+          <div className={` w-full flex sm:items-center sm:flex-row flex-col-reverse sm:justify-end `}>
+            <div className='sm:w-[67.5%] flex justify-center items-center'>
               <Texts language = {language}  setLanguage ={setLanguage} />
+
+            </div>
               <div className=' flex justify-center items-center mt-[80px]'>
               <div className=' h-[1px] w-[90%] bg-[#BE794E] sm:hidden block'></div>
               </div>
@@ -38,8 +42,8 @@ function App() {
           </div>
           {/* end top section */}
              {/* start bottom section */}
-             <div className=' sm:absolute sm:bottom-16 sm:gap-32  ml-[170px] flex sm:flex-row flex-col sm:mr-0 mr-[170px] gap-10  justify-center items-center'>
-              <div className=' flex justify-center items-center gap-10'>
+             <div className='  sm:w-full mt-1 sm:absolute sm:bottom-16 sm:right-[170px] sm:gap-32 gap-10   flex sm:flex-row flex-col sm:mr-0 mr-[40px]   justify-center items-center'>
+              <div className='  flex justify-center sm:mr-[0px]  items-center gap-10'>
               <img src={data[4].src} className=' sm:block hidden mb-20 '></img>
             <Form language={language} setLanguage={setLanguage}/> 
               

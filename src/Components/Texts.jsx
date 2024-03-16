@@ -69,10 +69,10 @@ const Texts = ({language , setLanguage}) => {
       // }
 
   return (
-    <div  className={` relative  sm:mr-[${language==2 ? 0 : 40 }px]  mb-6`}>
-      <img className=' absolute sm:top-[5%] sm:right-[40%] right-[40%] top-0  ' src={data[2].src}></img>
+    <div  className={` relative ${language==0 ? 'sm:mr-0 top-[-10px]' : language==1 ? 'sm:mr-2': 'sm:mr-2'  }  sm:right-[10%] sm:mb-6  mb-10`}>
+      <img className=' absolute sm:top-[5%] sm:right-[40%] right-[40%] top-0' src={data[2].src}></img>
       <div className=' sm:mt-[110px] flex flex-col justify-center items-center mt-[100px] '>
-        <span className='  sm:text-[18px] text-center text-[14px] font-sahel mb-4'>{t("title")}</span>
+        <span className='  sm:text-[18px] text-center text-[14px] font-sahel mb-4 mx-12 '>{t("title")}</span>
         <div className=' flex flex-col justify-center items-center'>
         <span className=' sm:text-[14px] text-[9px]'>{t("line1")}</span>
         <span className=' sm:text-[14px] text-[9px]'>{t("line2")}</span>
